@@ -1,11 +1,382 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="zh-Hant">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
+    <title>個人網頁 | 你的名字</title>
+    <style>
+        :root {
+            --bg: #0f172a;
+            --surface: #111827;
+            --text: #e2e8f0;
+            --muted: #94a3b8;
+            --accent: #38bdf8;
+            --accent-soft: rgba(56, 189, 248, 0.2);
+            --radius: 24px;
+            font-family: Inter, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+        }
+
+        * {
+            box-sizing: border-box;
+        }
+
+        html, body {
+            margin: 0;
+            min-height: 100%;
+            background: radial-gradient(circle at top, rgba(56, 189, 248, 0.15), transparent 30%),
+                        linear-gradient(180deg, #0f172a 0%, #020617 100%);
+            color: var(--text);
+        }
+
+        body {
+            line-height: 1.6;
+        }
+
+        .page {
+            max-width: 1100px;
+            margin: 0 auto;
+            padding: 24px;
+        }
+
+        header {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            gap: 18px;
+            padding: 18px 0;
+        }
+
+        .brand {
+            font-weight: 700;
+            letter-spacing: 0.08em;
+            text-transform: uppercase;
+            color: var(--accent);
+        }
+
+        .nav {
+            display: flex;
+            gap: 18px;
+            flex-wrap: wrap;
+            font-size: 0.95rem;
+        }
+
+        .nav a {
+            color: var(--muted);
+            text-decoration: none;
+            transition: color 0.2s ease;
+        }
+
+        .nav a:hover {
+            color: var(--text);
+        }
+
+        .hero {
+            display: grid;
+            grid-template-columns: 1.2fr 0.8fr;
+            gap: 40px;
+            align-items: center;
+            padding: 64px 0;
+        }
+
+        .hero-content h1 {
+            margin: 0 0 18px;
+            font-size: clamp(2.8rem, 4vw, 4.5rem);
+            line-height: 1.05;
+        }
+
+        .hero-content p {
+            margin: 0 0 28px;
+            max-width: 640px;
+            color: var(--muted);
+        }
+
+        .hero-buttons {
+            display: flex;
+            gap: 14px;
+            flex-wrap: wrap;
+        }
+
+        .button,
+        .button-secondary {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            border-radius: 999px;
+            padding: 14px 24px;
+            font-weight: 600;
+            text-decoration: none;
+            transition: transform 0.2s ease, background 0.2s ease;
+        }
+
+        .button {
+            background: var(--accent);
+            color: #020617;
+        }
+
+        .button-secondary {
+            background: rgba(229, 231, 235, 0.08);
+            color: var(--text);
+            border: 1px solid rgba(148, 163, 184, 0.2);
+        }
+
+        .button:hover,
+        .button-secondary:hover {
+            transform: translateY(-2px);
+        }
+
+        .hero-card {
+            background: rgba(255, 255, 255, 0.04);
+            border: 1px solid rgba(148, 163, 184, 0.12);
+            border-radius: var(--radius);
+            padding: 28px;
+            box-shadow: 0 24px 80px rgba(15, 23, 42, 0.25);
+        }
+
+        .hero-card h3 {
+            margin-top: 0;
+            color: var(--text);
+        }
+
+        .hero-card p {
+            color: var(--muted);
+        }
+
+        section {
+            margin-top: 64px;
+        }
+
+        .section-title {
+            display: flex;
+            align-items: center;
+            gap: 14px;
+            margin-bottom: 28px;
+        }
+
+        .section-title span {
+            display: inline-flex;
+            width: 42px;
+            height: 42px;
+            align-items: center;
+            justify-content: center;
+            border-radius: 50%;
+            background: rgba(56, 189, 248, 0.16);
+            color: var(--accent);
+            font-weight: 700;
+        }
+
+        .section-title h2 {
+            margin: 0;
+            font-size: 1.75rem;
+        }
+
+        .grid-2 {
+            display: grid;
+            grid-template-columns: repeat(2, minmax(0, 1fr));
+            gap: 24px;
+        }
+
+        .card {
+            background: rgba(255, 255, 255, 0.04);
+            border: 1px solid rgba(148, 163, 184, 0.12);
+            border-radius: var(--radius);
+            padding: 28px;
+        }
+
+        .card h3 {
+            margin-top: 0;
+            color: var(--text);
+        }
+
+        .card p {
+            color: var(--muted);
+        }
+
+        .skills {
+            display: grid;
+            grid-template-columns: repeat(2, minmax(0, 1fr));
+            gap: 16px;
+        }
+
+        .skill {
+            padding: 16px 18px;
+            border-radius: 18px;
+            background: rgba(56, 189, 248, 0.1);
+            color: #dbeafe;
+            border: 1px solid rgba(56, 189, 248, 0.18);
+            font-size: 0.95rem;
+            font-weight: 600;
+        }
+
+        .project-list {
+            display: grid;
+            gap: 18px;
+        }
+
+        .project {
+            display: flex;
+            flex-direction: column;
+            gap: 12px;
+            padding: 22px;
+            border-radius: 20px;
+            background: rgba(255, 255, 255, 0.04);
+            border: 1px solid rgba(148, 163, 184, 0.12);
+        }
+
+        .project h4 {
+            margin: 0 0 6px;
+        }
+
+        .project small {
+            color: var(--accent);
+        }
+
+        footer {
+            margin-top: 80px;
+            padding: 28px 0 14px;
+            border-top: 1px solid rgba(148, 163, 184, 0.12);
+            color: var(--muted);
+            display: flex;
+            justify-content: space-between;
+            flex-wrap: wrap;
+            gap: 14px;
+        }
+
+        @media (max-width: 900px) {
+            .hero {
+                grid-template-columns: 1fr;
+            }
+        }
+
+        @media (max-width: 680px) {
+            .page {
+                padding: 18px;
+            }
+
+            .nav {
+                justify-content: center;
+            }
+
+            .grid-2,
+            .skills {
+                grid-template-columns: 1fr;
+            }
+        }
+    </style>
 </head>
 <body>
-    213132132541654654
+    <div class="page">
+        <header>
+            <div class="brand">你的名字</div>
+            <nav class="nav">
+                <a href="#about">關於</a>
+                <a href="#skills">技能</a>
+                <a href="#projects">作品</a>
+                <a href="#contact">聯絡</a>
+            </nav>
+        </header>
+
+        <section class="hero">
+            <div class="hero-content">
+                <p>歡迎來到我的個人網頁</p>
+                <h1>嗨，我是<span style="color: var(--accent);">Your Name</span>，一位熱愛設計與程式的創意工作者。</h1>
+                <p>我專注於前端開發、品牌視覺與流暢的使用者體驗。希望透過作品與設計，將想法具象化並創造具感染力的數位故事。</p>
+                <div class="hero-buttons">
+                    <a href="#projects" class="button">查看作品</a>
+                    <a href="#contact" class="button-secondary">聯絡我</a>
+                </div>
+            </div>
+            <aside class="hero-card">
+                <h3>快速介紹</h3>
+                <p>目前專注於：前端工程、網站設計、UI/UX、品牌視覺。常用工具如 Figma、VS Code、React、HTML、CSS、JavaScript。</p>
+                <div class="skills" style="margin-top: 18px;">
+                    <div class="skill">前端開發</div>
+                    <div class="skill">反應式設計</div>
+                    <div class="skill">品牌視覺</div>
+                    <div class="skill">作品集網站</div>
+                </div>
+            </aside>
+        </section>
+
+        <section id="about">
+            <div class="section-title">
+                <span>01</span>
+                <h2>關於我</h2>
+            </div>
+            <div class="card">
+                <h3>我喜歡把想法變成看得見的作品</h3>
+                <p>從視覺設計到互動體驗，我擅長整合創意與技術，打造具有邏輯與美感的網頁。無論是個人品牌、作品展示或企業形象，我都會把使用者與內容放在第一位。</p>
+            </div>
+        </section>
+
+        <section id="skills">
+            <div class="section-title">
+                <span>02</span>
+                <h2>技能</h2>
+            </div>
+            <div class="grid-2">
+                <div class="card">
+                    <h3>專業技能</h3>
+                    <p>我熟悉以下技術與工具，且擅長將它們結合成直覺且有吸引力的網頁體驗。</p>
+                    <div class="skills" style="margin-top: 18px;">
+                        <div class="skill">HTML / CSS</div>
+                        <div class="skill">JavaScript</div>
+                        <div class="skill">React</div>
+                        <div class="skill">Figma</div>
+                    </div>
+                </div>
+                <div class="card">
+                    <h3>個人優勢</h3>
+                    <p>我擅長在團隊中溝通，並且能快速將需求拆解成可執行的設計與專案。期待用簡潔的視覺與細節提升使用者的互動體驗。</p>
+                    <ul style="color: var(--muted); margin: 16px 0 0; padding-left: 18px;">
+                        <li>使用者導向</li>
+                        <li>跨領域協作</li>
+                        <li>快速原型迭代</li>
+                        <li>細節掌控</li>
+                    </ul>
+                </div>
+            </div>
+        </section>
+
+        <section id="projects">
+            <div class="section-title">
+                <span>03</span>
+                <h2>作品集</h2>
+            </div>
+            <div class="project-list">
+                <article class="project">
+                    <div>
+                        <h4>品牌形象網站</h4>
+                        <small>前端 / 設計</small>
+                    </div>
+                    <p>打造一個富有設計感的企業形象網站，包含響應式版面、動態互動與品牌色彩系統，讓內容在手機與桌面端都能清晰呈現。</p>
+                </article>
+                <article class="project">
+                    <div>
+                        <h4>個人作品展示頁</h4>
+                        <small>UI / 開發</small>
+                    </div>
+                    <p>建置一個實用的作品展示頁面，將案例、服務與聯絡資訊整合成簡潔體驗。支援深色模式與流暢的滑動效果。</p>
+                </article>
+            </div>
+        </section>
+
+        <section id="contact">
+            <div class="section-title">
+                <span>04</span>
+                <h2>聯絡我</h2>
+            </div>
+            <div class="card">
+                <h3>準備好開始新專案了嗎？</h3>
+                <p>如果你想合作、設計專案，或想聊聊新的想法，歡迎透過以下方式聯絡我。</p>
+                <p style="margin-top: 18px;"><strong>Email：</strong><a href="mailto:youremail@example.com" style="color: var(--accent); text-decoration: none;">youremail@example.com</a></p>
+                <p><strong>電話：</strong><span style="color: var(--muted);">+886 912 345 678</span></p>
+            </div>
+        </section>
+
+        <footer>
+            <div>© 2026 你的名字。所有權利保留。</div>
+            <div style="color: var(--accent);">Designed with a modern, responsive layout.</div>
+        </footer>
+    </div>
 </body>
 </html>
